@@ -5,10 +5,11 @@
   <meta charset='utf-8' />
   <link href='./Content/fullcalendar.min.css ' rel='stylesheet' />
   <link href='./Content/fullcalendar.print.css ' rel='stylesheet' />
-
   <script src='./Scripts/moment.min.js'></script>
   <script src='./Scripts/jquery.min.js'></script>
   <script src='./Scripts/fullcalendar.min.js'></script>
+  <script src='./Scripts/locale-all.js'></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
   </script>
@@ -23,66 +24,20 @@
   <!-- 參考資料: http://booking.tpsc.sporetrofit.com/Location/Reserve?LID=BTSC&CategoryId=Badminton -->
   <script>
     $(document).ready(function () {
-      moment.locale("zh-tw");
       $('#calendar').fullCalendar({
-        locale: "zh-tw",
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: ''
+        },
+        locale: 'zh-tw',
+        weekNumbers: false,
+        weekNumbersWithinDays: true,
+        weekNumberCalculation: "ISO",
+        selectable: false,
+        selectHelper: false,
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        events: [{
-            title: 'All Day Event',
-            start: '2019-01-01'
-          },
-          {
-            title: 'Long Event',
-            start: '2019-01-07',
-            end: '2019-01-10'
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2019-01-09T16:00:00'
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2019-01-16T16:00:00'
-          },
-          {
-            title: 'Conference',
-            start: '2019-01-11',
-            end: '2019-01-13'
-          },
-          {
-            title: 'Meeting',
-            start: '2019-01-12T10:30:00',
-            end: '2019-01-12T12:30:00'
-          },
-          {
-            title: 'Lunch',
-            start: '2019-01-12T12:00:00'
-          },
-          {
-            title: 'Meeting',
-            start: '2019-01-12T14:30:00'
-          },
-          {
-            title: 'Happy Hour',
-            start: '2019-01-12T17:30:00'
-          },
-          {
-            title: 'Dinner',
-            start: '2019-01-12T20:00:00'
-          },
-          {
-            title: 'Birthday Party',
-            start: '2019-01-13T07:00:00'
-          },
-          {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: '2019-01-28'
-          }
-        ]
+        eventLimit: true // allow "more" link when too many events
       });
 
     });
@@ -101,21 +56,25 @@
 </head>
 
 <body>
-  <div class="container" id="app">
-    <div class="container body-content">
-      <div id='calendar' style="background-color: #fff"></div>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <img class="jaspervillaxinyi-logo" src="http://www.jaspervillaxinyi.com.tw/web/res/zh_TW/D002/images/logo-pc.png">
     </div>
+  </div>
+  <div class="container" id="app">
     <form>
       <div class="form-group">
-        <div id="divTest">123123</div>
-        <label for="exampleInputEmail1">課程名稱</label>
+        <h4 class="row coach-label font-weight-bold">課程名稱</h4>
         <select class="form-control" name="selClass" id="selClass" v-model="formData.bookingClass"
           @change="jspClassChange()">
           <option value="請選擇">請選擇</option>
           <option v-for="(item,index) in jspClass" :value="item">{{item.name}}</option>
         </select>
       </div>
-      <div class="container" v-if="formData.bookingClass !== '請選擇'">
+      <div class="form-group body-content">
+        <!-- <div id='calendar' style="background-color: #fff"></div> -->
+      </div>
+      <div class="form-group" v-if="formData.bookingClass !== '請選擇'">
         <h4 class="row coach-label font-weight-bold">課程介紹</h4>
         <div class="row">
           <div class="card card-coach col-md-12">
@@ -129,17 +88,17 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">姓名</label>
+        <h4 class="row coach-label font-weight-bold">姓名</h4>
         <input type="text" class="form-control" id="txtCustomerName" placeholder="請輸入姓名" required>
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">電子郵件</label>
+        <h4 class="row coach-label font-weight-bold">電子郵件</h4>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
           placeholder="請輸入電子郵件" required>
         <small id="emailHelp" class="form-text text-muted">我們絕不會與其他任何人分享您的電子郵件。</small>
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">聯絡電話</label>
+        <h4 class="row coach-label font-weight-bold">聯絡電話</h4>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
           placeholder="請輸入聯絡電話" required>
       </div>

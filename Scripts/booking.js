@@ -77,7 +77,7 @@ var app = new Vue({
     ]
   },
   methods: {
-    // 課程下拉框改變事件: 更新課程介紹
+    // 課程名稱下拉框改變事件: 更新課程介紹
     jspClassChange: function () {
       console.log(this.events);
       jQuery('#divTest').html('yyyyyyyyy')
